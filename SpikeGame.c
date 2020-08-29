@@ -16,31 +16,70 @@ int generateSpikes(){
 
 int main()
 {
-	printf("Hello, welcome to Dungeon of Doom, you are walking through a dark cave and there are skipes in front of you!\n\n\
-!-----------!Every step you take there are spikes!!\n\
-!-----------!But you don't know if there are on the ceiling and you must crawl or they are on the ground and you must jump.\n\
+	printf("Hello, welcome to Dungeon of Doom, you are walking through a dark cave and there are spikes in front of you!\n\n\
+!-----------!Every step you take there are deinitely spikes!!\n\
+!-----------!But you don't know if there are on the ceiling (when you must crawl) or they are on the ground(you must jump).\n\
 !-----------!Have faith and enter w for jump and s for crawl.\n\
-!-----------!You have maximum of 10 hit points, Let us see how long you survive.\n\
-!-----------!If you know the cheat key, press it to regain all your health points\n");
+!-----------!Every step you move if you guessed right, you score will increase.\n\
+!-----------!You have maximum of 10 hit points and the cave is 100 steps long, lets us see if you can reach the end.\n\
+!-----------!If you know the cheat key, press it to regain all your health points but lost half you steps\n");
     int health = 10;
-	return 0;
+	
     int *addressHealth = &health;
 
     int spikePosition = 0;
+    char userInput; //Only valid inputs are w, s or c
+
+    int score = 0;
 
     while (health > 0){
         spikePosition = generateSpikes();
-        //Provide a comment to user to enter w or s
+        prinf("Please enter w or s, you may also enter the cheat key but only the Dungeon Masters knows that...!");
+        printf("Press to q to exit \n");
+        scanf("%c",&userInput);
+        getchar();
+
         //Validate input:w, s or c
+        if(userInput != 's' || userInput !='w'|| userInput !='c' || userInput !='q'){
+            continue;
+        }
+       
         //If user inputs c, send message that cheatmode activated score will be halfed,
+        if(userInput == 'c')
+        {
             //set health to 10
+            health = 10;
             //half the score
-        //Compare spike position against user input:
-            //If user input is w and spikes are 1. health = health -1
-            //If user input is s and spikes are 0. health = health -1
-            //else score is score + 1 
-        //If score = 100 .. User break,user wins
-        // return 0; and exit program
+            score = score/2; //interger divison is acceptable (floor division)
+        }
+            
+        //Compare spike position against user input.
+            //If user input is w and spikes are 1 and If user input is s and spikes are 0.
+        if((spikePosition == 1 && userInput == 'w')||(spikePosition == 0 && userInput == 's'))
+        {
+            health = health - 1;     
+        }else 
+        {
+            score = score + 1;
+        }
+
+         if (userInput == 'e')
+        {
+            printf("Exiting now... you score was %d and you still had %d health left", score, health);
+            break;
+        }
+
+
+        //If score = 100 .. break,user wins
+        if (score == 100)
+        {
+            printf("You see the light for a first time in a while,\n YOU WIN !!!");
+            break;
+        }
+
     }
+
+    printf("Thank you for playing Dungeon of Doom");
+    return 0;
 }
 
