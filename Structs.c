@@ -1,15 +1,23 @@
 #include <stdio.h>
 
-struct rectangle
+typedef struct
 {
 	int length;
 	int width;
-};
+}rectangle;
+
+typedef struct
+{
+	int x;
+	int y;
+}position;
+
+
 
 int main()
 {
 
-	struct rectangle myRectangle = {5, 10};
+	rectangle myRectangle = {5, 10};
 	printf ("Length: %d. Width: %d\n",myRectangle.length, myRectangle.width);
 
 
