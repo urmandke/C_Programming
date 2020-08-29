@@ -2,20 +2,18 @@
 #include <stdbool.h>
 
 //To take user input of a whole number
-//To output all prime numbers including and lower then the given number.
+//To output if the given input is a prime number.
 
 bool isPrime (int num){
-	for(int i = 2;i<num;i++)
+	for(int i = 2;i < num;i++)
 	{
 		if (num % i == 0)
 		{
 			return false;
 		}
-		else 
-		{
-			return true;
-		}
 	}
+	
+	return true;
 }
 
 int main()
